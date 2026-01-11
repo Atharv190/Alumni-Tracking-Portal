@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Portal Admin Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #e0e7ff;
+            --secondary: #3f37c9;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #f72585;
+            --dark: #212529;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --card-shadow: 0 10px 20px rgba(0, 0, 0, 0.08), 0 6px 6px rgba(0, 0, 0, 0.05);
+            --hover-shadow: 0 15px 30px rgba(0, 0, 0, 0.12), 0 10px 10px rgba(0, 0, 0, 0.06);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            box-shadow: 5px 0 25px rgba(0,0,0,0.08);
+            padding: 25px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            z-index: 100;
+            border-right: 1px solid var(--glass-border);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            padding: 0 25px;
+        }
+        
+        .logo i {
+            font-size: 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-right: 12px;
+        }
+        
+        .logo h2 {
+            font-size: 22px;
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .menu {
+            padding: 0 20px;
+        }
+        
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            color: var(--gray);
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.7s;
+        }
+        
+        .menu-item:hover::before {
+            left: 100%;
+        }
+        
+        .menu-item i {
+            margin-right: 12px;
+            font-size: 20px;
+            width: 24px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .menu-item:hover, .menu-item.active {
+            background: linear-gradient(135deg, var(--primary-light), rgba(255,255,255,0.8));
+            color: var(--primary);
+            font-weight: 500;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.15);
+            transform: translateX(5px);
+        }
+        
+        .menu-item:hover i {
+            transform: scale(1.1);
+        }
+        
+        .menu-item.active {
+            background: linear-gradient(135deg, rgba(67,97,238,0.15), rgba(255,255,255,0.9));
+            border-left: 4px solid var(--primary);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            padding: 30px;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            padding: 15px 0;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 2px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.5);
+        }
+        
+        .notification-bell {
+            position: relative;
+            font-size: 22px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .notification-bell:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--danger);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Enhanced Quick Actions */
+        .quick-actions {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 35px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+        
+        .quick-actions::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--success));
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 80%;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 3px;
+        }
+        
+        .section-title i {
+            margin-right: 12px;
+            color: var(--primary);
+            font-size: 26px;
+        }
+        
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .action-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            border-radius: 16px;
+            background: white;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: var(--card-shadow);
+        }
+        
+        .action-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-light), white);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: -1;
+        }
+        
+        .action-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: var(--hover-shadow);
+            border-color: var(--primary);
+        }
+        
+        .action-item:hover::before {
+            opacity: 1;
+        }
+        
+        .action-item i {
+            font-size: 32px;
+            margin-bottom: 18px;
+            color: var(--primary);
+            transition: all 0.4s;
+            background: var(--primary-light);
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .action-item:hover i {
+            color: white;
+            background: var(--primary);
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .action-item span {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark);
+            text-align: center;
+            transition: color 0.3s;
+        }
+        
+        .action-item:hover span {
+            color: var(--secondary);
+        }
+        
+        /* Different colors for different action items */
+        .action-item:nth-child(1) i { color: #4361ee; background: rgba(67,97,238,0.15); }
+        .action-item:nth-child(1):hover i { background: #4361ee; }
+        
+        .action-item:nth-child(2) i { color: #4cc9f0; background: rgba(76,201,240,0.15); }
+        .action-item:nth-child(2):hover i { background: #4cc9f0; }
+        
+        .action-item:nth-child(3) i { color: #7209b7; background: rgba(114,9,183,0.15); }
+        .action-item:nth-child(3):hover i { background: #7209b7; }
+        
+        .action-item:nth-child(4) i { color: #f8961e; background: rgba(248,150,30,0.15); }
+        .action-item:nth-child(4):hover i { background: #f8961e; }
+        
+        .action-item:nth-child(5) i { color: #f72585; background: rgba(247,37,133,0.15); }
+        .action-item:nth-child(5):hover i { background: #f72585; }
+        
+        .action-item:nth-child(6) i { color: #3a86ff; background: rgba(58,134,255,0.15); }
+        .action-item:nth-child(6):hover i { background: #3a86ff; }
+        
+        .action-item:nth-child(7) i { color: #2ec4b6; background: rgba(46,196,182,0.15); }
+        .action-item:nth-child(7):hover i { background: #2ec4b6; }
+        
+        .action-item:nth-child(8) i { color: #ef476f; background: rgba(239,71,111,0.15); }
+        .action-item:nth-child(8):hover i { background: #ef476f; }
+        
+        /* Recent Activity */
+        .recent-activity {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--glass-border);
+        }
+        
+        .activity-list {
+            list-style: none;
+        }
+        
+        .activity-item {
+            display: flex;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--gray-light);
+            transition: background 0.3s;
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        .activity-item:hover {
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+        
+        .activity-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 18px;
+            color: var(--primary);
+            font-size: 18px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+        }
+        
+        .activity-content {
+            flex: 1;
+        }
+        
+        .activity-title {
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+        
+        .activity-time {
+            font-size: 13px;
+            color: var(--gray);
+        }
+        
+        /* Floating Elements */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 70%;
+            left: 80%;
+            animation-delay: -5s;
+        }
+        
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            top: 40%;
+            left: 85%;
+            animation-delay: -10s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(180deg);
+            }
+            100% {
+                transform: translateY(0) rotate(360deg);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .actions-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="floating-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-user-graduate"></i>
+                <h2>Admin Portal</h2>
+            </div>
+            
+            <nav class="menu">
+                <a href="#" class="menu-item active">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+                
+                <a href="ApproveRegistrations.jsp" class="menu-item">
+                    <i class="fas fa-user-check"></i>
+                    <span>Approve Users</span>
+                </a>
+                
+                <a href="AdminAlumni.jsp" class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Alumni</span>
+                </a>
+                
+                <a href="AdminStudent.jsp" class="menu-item">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+                
+                <a href="AdminJob.html" class="menu-item">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Jobs</span>
+                </a>
+                
+                <a href="Events.html" class="menu-item">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Events</span>
+                </a>
+                
+                
+                
+                <a href="index.html" class="menu-item">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Admin Dashboard</h1>
+                
+                <div class="user-info">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                    
+                    <div class="user-avatar">AD</div>
+                </div>
+            </div>
+            
+            <!-- Enhanced Quick Actions -->
+            <div class="quick-actions">
+                <h2 class="section-title">
+                    <i class="fas fa-bolt"></i> Quick Actions
+                </h2>
+                
+                <div class="actions-grid">
+                    <a href="AlumniRegister.html" class="action-item">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Add New Alumni</span>
+                    </a>
+                    
+                    <a href="ApproveRegistrations.jsp" class="action-item">
+                        <i class="fas fa-user-check"></i>
+                        <span>Approve Registrations</span>
+                    </a>
+                    
+                    <a href="AdminAlumni.jsp" class="action-item">
+                        <i class="fas fa-users"></i>
+                        <span>Manage Alumni</span>
+                    </a>
+                    
+                    <a href="AdminViewStudent.jsp" class="action-item">
+                        <i class="fas fa-user-graduate"></i>
+                        <span>Manage Students</span>
+                    </a>
+                    
+                    <a href="AdminJob.html" class="action-item">
+                        <i class="fas fa-briefcase"></i>
+                        <span>Post New Job</span>
+                    </a>
+                    
+                    <a href="Events.html" class="action-item">
+                        <i class="fas fa-calendar-plus"></i>
+                        <span>Create Event</span>
+                    </a>
+                    
+                    <a href="AdminViewUpcomingEvent.jsp" class="action-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>View Upcoming Events</span>
+                    </a>
+                    
+                    <a href="AdminViewexpiredevent.jsp" class="action-item">
+                        <i class="fas fa-calendar-times"></i>
+                        <span>View Expired Events</span>
+                    </a>
+                    
+                    <a href="Notices.html" class="action-item">
+                        <i class="fas fa-bell"></i>
+                        <span>View Notices</span>
+                    </a>
+                    
+                    <a href="index.html" class="action-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recent Activity -->
+            <div class="recent-activity">
+                <h2 class="section-title">
+                    <i class="fas fa-history"></i> Recent Activity
+                </h2>
+                
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">5 new alumni registrations require approval</div>
+                            <div class="activity-time">10 minutes ago</div>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">New job posted by Microsoft</div>
+                            <div class="activity-time">2 hours ago</div>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Alumni meetup event created for June 15</div>
+                            <div class="activity-time">Yesterday</div>
+                        </div>
+                    </li>
+                    
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Profile updated by John Doe (Class of 2015)</div>
+                            <div class="activity-time">2 days ago</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const actionItems = document.querySelectorAll('.action-item');
+            
+            actionItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.03)';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+            
+            const notificationBell = document.querySelector('.notification-bell');
+            notificationBell.addEventListener('click', function() {
+                this.style.transform = 'scale(0.9)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+            
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

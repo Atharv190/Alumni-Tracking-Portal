@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlumniTrack - Stay Connected With Your Alma Mater</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* ========================================
+        NEW & IMPROVED COLOR PALETTE AND STYLES
+        ========================================
+        */
+        :root {
+            /* --- Primary Palette: Deep Blue & Gold --- */
+            --primary-color: #1B3A57;      /* Professional Deep Blue */
+            --primary-color-dark: #0A2647;   /* Even Deeper Blue */
+            --secondary-color: #EAA800;   /* Warm Gold Accent */
+            --accent-color: #F7C85C;       /* Lighter Gold */
+            
+            /* --- Neutral & Utility Colors --- */
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --light-color: #f8f9fa;        /* Clean Off-White */
+            --dark-color: #1a1d24;         /* Soft Dark for Text/BG */
+            
+            /* --- Gradients --- */
+            --gradient-primary: linear-gradient(135deg, #1B3A57, #0A2647);
+            --gradient-secondary: linear-gradient(135deg, #EAA800, #F7C85C);
+            --gradient-success: linear-gradient(135deg, #27ae60, #2ecc71);
+
+            /* --- Text & Shadows --- */
+            --text-color-dark: #333;
+            --text-color-light: #f8f9fa;
+            --box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+            --box-shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6;
+            color: var(--text-color-dark);
+            background-color: #f9fafb; /* Slightly warmer light background */
+            transition: background-color 0.4s ease, color 0.4s ease;
+        }
+
+        /* --- NAVBAR REFINED DESIGN START --- */
+        .navbar {
+            background: #ffffff; /* Clean solid background */
+            padding: 1rem 0;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+            border-bottom: 1px solid #e9ecef; /* Clean separator */
+        }
+
+        .navbar.scrolled {
+            padding: 0.75rem 0; /* Shrink padding on scroll */
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar-brand:hover {
+            transform: scale(1.03); /* Subtle grow on hover */
+        }
+
+        .navbar-brand i {
+            color: var(--secondary-color); /* Icon uses gold accent */
+            margin-right: 0.75rem;
+            font-size: 2rem;
+        }
+
+        .navbar-brand span {
+            color: var(--secondary-color);
+            font-weight: 800;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 0.75rem;
+            padding: 0.5rem 0;
+            position: relative;
+            transition: color 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        /* Elegant Underline Hover Effect */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--secondary-color);
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+        
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary-color-dark);
+        }
+        
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Register Button in Navbar */
+        .btn-nav-register {
+            padding: 0.6rem 1.8rem;
+            border-radius: 8px; /* Modern rounded corners */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            background: var(--secondary-color);
+            color: var(--primary-color-dark);
+            box-shadow: 0 4px 15px rgba(234, 168, 0, 0.2);
+            margin-left: 1rem;
+        }
+
+        .btn-nav-register:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 20px rgba(234, 168, 0, 0.3);
+            background: var(--accent-color);
+            color: var(--primary-color-dark);
+        }
+        /* --- NAVBAR REFINED DESIGN END --- */
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            color: var(--text-color-light);
+            text-align: center;
+        }
+
+        .hero-background-img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            filter: brightness(0.6);
+            z-index: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 38, 71, 0.85) 0%, rgba(27, 58, 87, 0.85) 100%); /* Overlay with new primary color */
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 4;
+            padding: 2rem 0;
+        }
+        
+        .text-gradient {
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        .hero-heading {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 4.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-text {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1.1rem 2.5rem;
+            border-radius: 8px; /* Consistent modern radius */
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        .btn-primary-custom {
+            background: var(--secondary-color);
+            color: var(--primary-color-dark);
+            border-color: var(--secondary-color);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--box-shadow-hover);
+            color: var(--primary-color-dark);
+            background: var(--accent-color);
+            border-color: var(--accent-color);
+        }
+
+        .btn-accent-custom {
+            background: transparent;
+            color: #fff;
+            border-color: #fff;
+        }
+
+        .btn-accent-custom:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: var(--box-shadow-hover);
+            background: #fff;
+            color: var(--primary-color);
+            border-color: #fff;
+        }
+
+        /* Sections padding */
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        /* Stats Section */
+        .stats-section {
+            background: #ffffff;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 2.5rem 1.5rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--secondary-color);
+        }
+
+        .stat-icon {
+            font-size: 3.5rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-text {
+            font-size: 1.15rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: #f9fafb;
+        }
+
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 4.5rem;
+            color: var(--primary-color-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--secondary-color);
+            border-radius: 3px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.8rem;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid #e9ecef;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--secondary-color);
+        }
+
+        .feature-icon {
+            font-size: 3.8rem;
+            background: var(--gradient-secondary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1.8rem;
+            transition: var(--transition);
+        }
+        
+        .feature-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .feature-text {
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        /* Login Portal Cards */
+        .login-section {
+            background: var(--gradient-primary);
+            position: relative;
+            overflow: hidden;
+        }
+        .login-section .section-title,
+        .login-section .section-title::after {
+            color: var(--text-color-light);
+        }
+
+        .login-portal-card {
+            background: rgba(255, 255, 255, 0.98);
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: none;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .login-portal-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--gradient-secondary);
+            transition: var(--transition);
+        }
+
+        .login-portal-card.admin-card::before { background: var(--gradient-primary); }
+        .login-portal-card.alumni-card::before { background: var(--gradient-secondary); }
+        .login-portal-card.student-card::before { background: var(--gradient-success); }
+        
+        .login-portal-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.22);
+        }
+
+        .card-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.8rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        .admin-icon { background: var(--gradient-primary); }
+        .alumni-icon { background: var(--gradient-secondary); }
+        .student-icon { background: var(--gradient-success); }
+        
+        .card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--primary-color-dark);
+            margin-bottom: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .login-portal-card:hover .card-title { color: var(--secondary-color); }
+        .admin-card:hover .card-title { color: var(--primary-color); }
+        .student-card:hover .card-title { color: var(--success-color); }
+
+        .card-description { color: #555; margin-bottom: 1.8rem; }
+        
+        .card-arrow {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .login-portal-card:hover .card-arrow { transform: translateX(10px); }
+        
+        /* Testimonials Section */
+        .testimonial-section { background: #f9fafb; }
+        
+        .testimonial-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            height: 100%;
+            border: 1px solid #e9ecef;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--box-shadow-hover);
+            border-color: var(--secondary-color);
+        }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            opacity: 0.5;
+            margin-bottom: 1.5rem;
+        }
+        
+        .author-image {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--secondary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .author-info h5 { color: var(--primary-color); }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color-dark);
+            color: var(--text-color-light);
+            padding: 5rem 0 1.5rem;
+        }
+        .footer-brand { color: var(--text-color-light); }
+        .footer-brand i, .footer-brand span { color: var(--secondary-color); }
+        .footer-title::after { background: var(--secondary-color); }
+        .footer-links a:hover { color: var(--secondary-color); }
+        .social-link:hover { background: var(--secondary-color); }
+        
+        /* Omitted unchanged styles for brevity: floating elements, responsive styles, etc. */
+        /* All other styles like testimonial-text, footer-description, etc., remain the same */
+
+        .hero-floating-elements,.hero-floating-element{position:absolute;top:0;left:0;width:100%;height:100%}.hero-floating-element{z-index:3;pointer-events:none;background:rgba(255,255,255,.1);border-radius:50%;animation:floatAndFade 20s infinite ease-in-out}.hero-floating-element:nth-child(1){top:10%;left:10%;width:150px;height:150px;animation-delay:0s}.hero-floating-element:nth-child(2){top:60%;left:80%;width:100px;height:100px;animation-delay:5s}.hero-floating-element:nth-child(3){bottom:20%;left:30%;width:200px;height:200px;animation-delay:10s}.hero-floating-element:nth-child(4){top:30%;right:5%;width:80px;height:80px;animation-delay:15s}@keyframes floatAndFade{0%,100%{transform:translate(0,0) scale(1);opacity:.8}25%{transform:translate(-20px,-20px) scale(1.1);opacity:.9}50%{transform:translate(0,20px) scale(1);opacity:.8}75%{transform:translate(20px,-10px) scale(.9);opacity:.7}}
+        .testimonial-text{font-style:italic;margin-bottom:2.5rem;color:var(--text-color-dark);line-height:1.8;opacity:.9}.testimonial-author{display:flex;align-items:center;gap:1.2rem}.author-info h5{margin:0;font-weight:700;font-size:1.1rem}.author-info p{margin:0;color:var(--text-color-dark);opacity:.75;font-size:.95rem}.footer-brand{font-family:'Montserrat',sans-serif;font-size:2.2rem;font-weight:800;margin-bottom:1.5rem;display:flex;align-items:center;gap:.5rem}.footer-description{margin-bottom:2.5rem;opacity:.85;line-height:1.8}.footer-title{font-family:'Montserrat',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:1.8rem;color:var(--text-color-light);position:relative}.footer-title::after{content:'';position:absolute;bottom:-5px;left:0;width:40px;height:3px;border-radius:2px}.footer-links{list-style:none;padding:0}.footer-links li{margin-bottom:.8rem}.footer-links a,.footer-links li i{color:var(--text-color-light);text-decoration:none;opacity:.85;transition:var(--transition);display:inline-flex;align-items:center;gap:.5rem}.footer-links a:hover{opacity:1;transform:translateX(5px)}.social-links{display:flex;gap:1rem}.social-link{display:flex;align-items:center;justify-content:center;width:55px;height:55px;background:rgba(255,255,255,.15);border-radius:50%;color:var(--text-color-light);text-decoration:none;transition:var(--transition);font-size:1.3rem;box-shadow:0 3px 10px rgba(0,0,0,.2)}.social-link:hover{transform:translateY(-5px) scale(1.05);color:var(--text-color-light);box-shadow:0 8px 20px rgba(0,0,0,.3)}.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding-top:2.5rem;margin-top:3rem;text-align:center;opacity:.75}section#contact{display:none}
+        @media (max-width:991px){.hero-heading{font-size:3.5rem}.hero-text{font-size:1.1rem}.section-title{font-size:2.8rem}.stat-number{font-size:2.8rem}.feature-icon,.stat-icon{font-size:3rem}.login-portal-card{padding:2.5rem}.card-icon{width:90px;height:90px;font-size:2.2rem}.btn-nav-register{display:none}}@media (max-width:767px){.hero-heading{font-size:2.8rem}.hero-text{font-size:1rem}.hero-buttons{flex-direction:column;align-items:center}.section-title{font-size:2.2rem}.stat-number{font-size:2.5rem}.feature-icon,.stat-icon{font-size:2.5rem}.hero-buttons .btn{width:100%;max-width:350px}.navbar-brand{font-size:1.7rem}.card-title{font-size:1.4rem}.feature-title{font-size:1.4rem}.card-icon{width:80px;height:80px;font-size:2rem}.testimonial-card{padding:2rem}.author-image{width:60px;height:60px}.footer-brand{font-size:1.8rem}.footer-title{font-size:1.1rem}}@media (max-width:575px){.hero-heading{font-size:2.2rem}.section-title{font-size:1.8rem}.navbar-collapse{text-align:center}.nav-link{margin:.5rem 0}.footer .col-lg-2,.footer .col-lg-3,.footer .col-lg-4{text-align:center}.social-links{justify-content:center}.footer-title::after{left:50%;transform:translateX(-50%)}}
+        html{scroll-behavior:smooth}::-webkit-scrollbar{width:10px}::-webkit-scrollbar-track{background:#f1f1f1}::-webkit-scrollbar-thumb{background:var(--secondary-color);border-radius:5px}::-webkit-scrollbar-thumb:hover{background:#c88f00}
+        
+        /* ========================================
+        DARK MODE STYLES
+        ========================================
+        */
+        body.dark-mode { background-color: #0A1929; color: #cdd6f1; }
+        body.dark-mode .hero-overlay { background: linear-gradient(135deg, rgba(10, 25, 41, 0.9) 0%, rgba(10, 25, 41, 0.95) 100%); }
+        body.dark-mode .navbar, body.dark-mode .navbar.scrolled { background: #0A1929; border-bottom-color: #1B3A57; }
+        body.dark-mode .navbar-brand { color: var(--light-color); }
+        body.dark-mode .nav-link { color: #a8b2d1; }
+        body.dark-mode .nav-link:hover, body.dark-mode .nav-link.active { color: var(--light-color); }
+        body.dark-mode .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(236, 240, 241, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+        body.dark-mode .stats-section, body.dark-mode .features-section, body.dark-mode .testimonial-section { background: #0A1929; }
+        body.dark-mode .stat-card, body.dark-mode .feature-card, body.dark-mode .testimonial-card { background: #1B3A57; border-color: rgba(234, 168, 0, 0.2); }
+        body.dark-mode .section-title, body.dark-mode .stat-number, body.dark-mode .feature-title, body.dark-mode .author-info h5, body.dark-mode .card-title { color: var(--light-color); }
+        body.dark-mode .stat-text, body.dark-mode .feature-text, body.dark-mode .testimonial-text, body.dark-mode .card-description, body.dark-mode .author-info p { color: #a8b2d1; }
+        body.dark-mode .login-section { background: linear-gradient(135deg, #0A1929, #0A2647); }
+        body.dark-mode .login-portal-card { background: #1B3A57; border-color: rgba(234, 168, 0, 0.2); }
+        body.dark-mode .admin-card:hover .card-title { color: var(--light-color); }
+        body.dark-mode .btn-accent-custom { background: transparent; color: var(--light-color); border-color: var(--light-color); }
+        body.dark-mode .btn-accent-custom:hover { background: var(--light-color); color: var(--primary-color-dark); border-color: var(--light-color); }
+        body.dark-mode .footer { background: #0A1929; }
+        body.dark-mode ::-webkit-scrollbar-track { background: #1B3A57; }
+        #darkModeToggle{background:0 0;border:1px solid #6c757d;color:#6c757d;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;padding:0;transition:all .3s ease}#darkModeToggle:hover{border-color:var(--secondary-color);color:var(--secondary-color)}body.dark-mode #darkModeToggle{border-color:#a8b2d1;color:#a8b2d1}body.dark-mode #darkModeToggle:hover{border-color:var(--secondary-color);color:var(--secondary-color)}
+
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-graduation-cap"></i> 
+                Alumni<span>Track</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#login">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#footer">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn-nav-register" href="AlumniRegister.html">Register</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <button id="darkModeToggle" class="btn">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section" id="home">
+        <div class="hero-background-img"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-floating-elements">
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+            <div class="hero-floating-element"></div>
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10 hero-content" data-aos="fade-up">
+                    <h1 class="hero-heading">
+                        Re-Connect. <br>Re-Engage. 
+                        <span class="text-gradient">AlumniTrack.</span>
+                    </h1>
+                    <p class="hero-text">
+                        Reconnect with classmates, explore career opportunities, empower students through alumni mentorship 
+                        and stay updated with your university’s latest events and achievements through our comprehensive alumni 
+                        network platform.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="AlumniRegister.html" class="btn btn-primary-custom">
+                            <i class="fas fa-user-plus me-2"></i>Register Today
+                        </a>
+                        <a href="#login" class="btn btn-accent-custom">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-section" id="stats">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-users"></i></div>
+                        <div class="stat-number" data-target="15000">0</div>
+                        <div class="stat-text">Alumni Connected</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <div class="stat-number" data-target="200">0</div>
+                        <div class="stat-text">Events Yearly</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="stat-number" data-target="85">0</div>
+                        <div class="stat-text">Active Engagement %</div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-user-tie"></i></div>
+                        <div class="stat-number" data-target="100">0</div>
+                        <div class="stat-text">Mentors Available</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section" id="features">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Our Powerful Features</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-users"></i></div>
+                        <h3 class="feature-title">Global Networking</h3>
+                        <p class="feature-text">
+                            Connect with your batchmates, seniors and juniors across different batches and 
+                            build a strong professional network that lasts a lifetime.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3 class="feature-title">Exclusive Events</h3>
+                        <p class="feature-text">
+                            Stay updated with reunions, webinars, workshops and other exclusive events 
+                            organized by your alma mater or fellow alumni.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-briefcase"></i></div>
+                        <h3 class="feature-title">Career Growth</h3>
+                        <p class="feature-text">
+                            Access exclusive job opportunities, mentorship programs and career guidance 
+                            from experienced alumni in your field.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-heart"></i></div>
+                        <h3 class="feature-title">Give Back</h3>
+                        <p class="feature-text">
+                            Contribute to your alma mater's growth through mentorship, guest lectures 
+                            and fundraising initiatives.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-newspaper"></i></div>
+                        <h3 class="feature-title">University Updates</h3>
+                        <p class="feature-text">
+                            Never miss out on the latest happenings, research breakthroughs and 
+                            achievements from your university.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-globe"></i></div>
+                        <h3 class="feature-title">Global Directory</h3>
+                        <p class="feature-text">
+                            Find and connect with alumni worldwide based on location, profession
+                            or graduation year.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="login-section" id="login">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">Choose Your Login Portal</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <a href="adminlogin.html" class="login-portal-card admin-card">
+                        <div class="card-icon admin-icon"><i class="fas fa-user-shield"></i></div>
+                        <h3 class="card-title">Admin Portal</h3>
+                        <p class="card-description">Administrative access for system management and university coordination</p>
+                        <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <a href="alumnilogin.html" class="login-portal-card alumni-card">
+                        <div class="card-icon alumni-icon"><i class="fas fa-user-graduate"></i></div>
+                        <h3 class="card-title">Alumni Portal</h3>
+                        <p class="card-description">Connect with your network, explore opportunities and give back</p>
+                        <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <a href="StudentLogin.html" class="login-portal-card student-card">
+                        <div class="card-icon student-icon"><i class="fas fa-user"></i></div>
+                        <h3 class="card-title">Student Portal</h3>
+                        <p class="card-description">Access resources, find mentors and prepare for your future</p>
+                        <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonial-section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title" data-aos="fade-up">What Our Alumni Say</h2>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">
+                            "AlumniTrack helped me reconnect with my college friends after 10 years. 
+                            We've even started a successful business together!"
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2" 
+                                alt="Sarah Johnson" class="author-image">
+                            <div class="author-info">
+                                <h5>Sarah Johnson</h5>
+                                <p>Class of 2012, Business Administration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">
+                            "Through AlumniTrack, I found an amazing mentor who guided me through 
+                            my career transition into tech. Truly invaluable!"
+                        </p>
+                        <div class="testimonial-author">
+                            <img src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2" 
+                                alt="Michael Chen" class="author-image">
+                            <div class="author-info">
+                                <h5>Michael Chen</h5>
+                                <p>Class of 2015, Computer Science</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-left"></i></div>
+                        <p class="testimonial-text">
+                            "The events organized through AlumniTrack are fantastic. I've attended 
+                            several reunions and career webinars that were incredibly helpful."
+                        </p>
+                        <div class="testimonial-author">
+                             <img src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=300&h=300&dpr=2"
+                                alt="David Rodriguez" class="author-image">
+                            <div class="author-info">
+                                <h5>David Rodriguez</h5>
+                                <p>Class of 2008, Mechanical Engineering</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact"></section>
+
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <div class="footer-brand">
+                        <i class="fas fa-graduation-cap"></i>
+                        Alumni<span>Track</span>
+                    </div>
+                    <p class="footer-description">
+                        Connecting alumni worldwide, fostering professional growth, and strengthening 
+                        ties with your alma mater.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#login">Login</a></li>
+                        <li><a href="register.html">Register</a></li>
+                        <li><a href="#footer">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Support</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <ul class="footer-links">
+                        <li>
+                            <i class="fas fa-map-marker-alt me-2"></i>
+                            123 Alumni Ave, University City
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope me-2"></i>
+                            info@alumnitrack.com
+                        </li>
+                        <li>
+                            <i class="fas fa-phone me-2"></i>
+                            +1 (234) 567-890
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> AlumniTrack. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.2/dist/vanilla-tilt.min.js"></script>
+
+    <script>
+        // All JavaScript remains the same, as the class names and IDs have not changed.
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 100,
+        });
+
+        VanillaTilt.init(document.querySelectorAll(".login-portal-card"), {
+            max: 15,
+            speed: 400,
+            glare: true,
+            "max-glare": 0.5,
+        });
+
+        const counters = document.querySelectorAll('.stat-number');
+        const speed = 200;
+
+        const startCounter = (counter) => {
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+
+            const updateCount = () => {
+                const increment = target / speed;
+                count += increment;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count).toLocaleString();
+                    requestAnimationFrame(updateCount);
+                } else {
+                    counter.innerText = target.toLocaleString() + (counter.getAttribute('data-target').includes('15000') || counter.getAttribute('data-target').includes('200') || counter.getAttribute('data-target').includes('100') ? '+' : '');
+                }
+            };
+            updateCount();
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    startCounter(entry.target);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        counters.forEach(counter => observer.observe(counter));
+
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const icon = darkModeToggle.querySelector('i');
+
+        const setTheme = (theme) => {
+            if (theme === 'dark') {
+                body.classList.add('dark-mode');
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark-mode');
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        };
+
+        darkModeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                setTheme('light');
+            } else {
+                setTheme('dark');
+            }
+        });
+
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme);
+        }
+        
+    </script>
+</body>
+</html>
