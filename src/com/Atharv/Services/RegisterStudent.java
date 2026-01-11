@@ -48,7 +48,6 @@ public class RegisterStudent extends HttpServlet {
 
             Connection con = (Connection) ConnectDb.getConnect();
 
-            // ✅ CORRECT SQL (matches your table exactly)
             String sql = "INSERT INTO student (name, email, password, branch, year) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -72,3 +71,4 @@ public class RegisterStudent extends HttpServlet {
         }
     }
 }
+
