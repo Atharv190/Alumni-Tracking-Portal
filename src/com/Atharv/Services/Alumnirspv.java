@@ -47,7 +47,6 @@ public class Alumnirspv extends HttpServlet {
 		    String alumniName = request.getParameter("alumniName");
 		    String eventName  = request.getParameter("eventName");
 
-		    // ✅ Get email directly from form (manual input)
 		    String email = request.getParameter("email");
 
 		    if (email == null || email.trim().isEmpty()) {
@@ -55,10 +54,8 @@ public class Alumnirspv extends HttpServlet {
 		        return;
 		    }
 
-		    // Connect to DB
 		    Connection con = (Connection) ConnectDb.getConnect();
 
-		    // Insert RSVP record
 		    PreparedStatement ps = con.prepareStatement(
 		        "INSERT INTO rsvp (name, email, event_name) VALUES (?, ?, ?)"
 		    );
@@ -83,4 +80,5 @@ public class Alumnirspv extends HttpServlet {
 		    response.sendRedirect("error.html");
 		}
 	}
+
 }
