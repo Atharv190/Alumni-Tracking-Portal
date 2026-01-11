@@ -7,11 +7,8 @@ It helps institutions track alumni career progress, share job opportunities, man
 
 👨‍💼 Admin
 Approve and manage alumni accounts
-
 Post and manage job opportunities
-
 Create and manage events
-
 View alumni and student records
 
 🎓 Alumni
